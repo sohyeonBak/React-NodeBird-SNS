@@ -1,0 +1,9 @@
+#env
+.env
+
+#next
+.next
+
+#etc
+node_modules
+react-NodeBirds.pem
