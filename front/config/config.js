@@ -1,1 +1,1 @@
-export const localhostUrl = 'http://3.35.230.159';
+export const localhostUrl = 'http://api.nodebird.letusloveoneanother.com/';

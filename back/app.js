@@ -31,13 +31,18 @@ if(process.env.NODE_ENV === 'production'){
     app.use(morgan('combined'))
     app.use(hpp());
     app.use(helmet())
+    app.use(cors({
+        origin: 'http://nodebird.letusloveoneanother.com',
+        credentials: true,
+    }));
 }else{
     app.use(morgan('dev'))
+    app.use(cors({
+        origin: true,
+        credentials: true,
+    }));
 }
-app.use(cors({
-    origin: ['http://localhost:3000', 'nodebird.com', 'http://3.36.94.83'],
-    credentials: true,
-}));
+
 app.use('/', express.static(path.join(__dirname, 'uploads')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -48,6 +53,7 @@ app.use(session({
     cookie:{
         httpOnly:true,
         secure:false,
+        domain: process.env.NODE_ENV === 'production' && '.nodebird.letusloveoneanother.com'
     }
 }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
