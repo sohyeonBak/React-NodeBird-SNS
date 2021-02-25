@@ -55,7 +55,6 @@ const User = () => {
           <meta name="description" content={`${userInfo.nickname}님의 게시글`} />
           <meta property="og:title" content={`${userInfo.nickname}님의 게시글`} />
           <meta property="og:description" content={`${userInfo.nickname}님의 게시글`} />
-          <meta property="og:url" content={`http://api.nodebird.com/user/${id}`} />
         </Head>
       )}
       {userInfo && (userInfo.id !== me?.id)
