@@ -6,7 +6,7 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 import useSWR from 'swr'
 import wrapper from '../store/configurestore'
-import { localhostUrl } from '../config/config';
+
 
 
 import AppLayout from '../components/AppLayout';
@@ -23,8 +23,8 @@ const Profile = () => {
   const [followersLimit, setFollowersLimit] = useState(3);
   const [followingsLimit, setFollowingsLimit] = useState(3);
 
-  const { data : followersData, error : followerError } = useSWR(`${localhostUrl}/user/followers?limit=${followersLimit}`, fetcher)
-  const { data : followingsData, error : followingError } = useSWR(`${localhostUrl}/user/followings?limit=${followingsLimit}`, fetcher)
+  const { data : followersData, error : followerError } = useSWR(`/user/followers?limit=${followersLimit}`, fetcher)
+  const { data : followingsData, error : followingError } = useSWR(`/user/followings?limit=${followingsLimit}`, fetcher)
 
 
   useEffect(()=>{
