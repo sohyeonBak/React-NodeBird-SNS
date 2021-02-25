@@ -3,6 +3,7 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 import ImagesZoom from './imageszoom.js';
+import { localhostUrl } from '../config/config';
 
 const PostImages = ({ images }) => {
   const [showImage, setShowImage] = useState(false);
@@ -18,7 +19,7 @@ const PostImages = ({ images }) => {
     return (
       // eslint-disable-next-line react/jsx-filename-extension
       <>
-        <img role="presentation" src={`http://localhost:3065/${images[0].src}`} alt={images[0].src} onClick={onZoom} />
+        <img role="presentation" src={`${localhostUrl}/${images[0].src}`} alt={images[0].src} onClick={onZoom} />
         {showImage && <ImagesZoom images={images} onClose={onClose} />}
       </>
     );
@@ -27,8 +28,8 @@ const PostImages = ({ images }) => {
   if (images.length === 2) {
     return (
       <>
-        <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={`http://localhost:3065/${images[0].src}`} alt={images[0].src} onClick={onZoom} />
-        <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={`http://localhost:3065/${images[1].src}`} alt={images[1].src} onClick={onZoom} />
+        <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={`${localhostUrl}/${images[0].src}`} alt={images[0].src} onClick={onZoom} />
+        <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={`${localhostUrl}/${images[1].src}`} alt={images[1].src} onClick={onZoom} />
         {showImage && <ImagesZoom images={images} onClose={onClose} />}
       </>
     );
@@ -36,7 +37,7 @@ const PostImages = ({ images }) => {
   return (
     <>
       <div>
-        <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={`http://localhost:3065/${images[0].src}`} alt={images[0].src} onClick={onZoom} />
+        <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={`${localhostUrl}/${images[0].src}`} alt={images[0].src} onClick={onZoom} />
         <div role="presentation" style={{ display: 'inline-block', width: '50%', textAlign: 'center', verticalAlign: 'middle' }} onClick={onZoom}>
           <PlusOutlined />
           <br />

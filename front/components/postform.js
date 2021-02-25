@@ -5,6 +5,8 @@ import { Button, Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE, ADD_POST_REQUEST } from '../reducers/post';
 import useinput from '../hooks/useinput';
+import { localhostUrl } from '../config/config';
+
 
 const PostForm = () => {
   const { imagePaths, addPostDone } = useSelector((state) => state.post);
@@ -76,7 +78,7 @@ const PostForm = () => {
       <div>
         {imagePaths.map((v,i) => (
           <div key={v} style={{ display: 'inline-block' }}>
-            <img src={`http://localhost:3065/${v}`} style={{ width: '200px' }} alt={v}/>
+            <img src={`${localhostUrl}/${v}`} style={{ width: '200px' }} alt={v}/>
             <div>
               <Button onClick={onRemoveImage(i)}>제거</Button>
             </div>

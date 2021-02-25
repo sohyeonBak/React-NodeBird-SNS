@@ -1,2 +1,2 @@
 export const domainUrl = 'http://api.nodebird.com';
-export const localhostUrl = 'http://localhost:3065';
+export const localhostUrl = 'http://3.35.230.159';
