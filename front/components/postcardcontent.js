@@ -14,7 +14,7 @@ const PostCardContent = ({ postData }) => (
       if (value.match(/(#[^\s#]+)/g)) {
         // eslint-disable-next-line react/no-array-index-key
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
-        return <Link href={`/hashtag/${value.slice(1)}`} key={index}><a>{value}</a></Link>;
+        return <Link href={`/hashtag/${value.slice(1)}`} prefetch={false} key={index}><a>{value}</a></Link>;
       }
       return value;
     })}
