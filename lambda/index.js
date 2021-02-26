@@ -7,7 +7,7 @@ exports.handler = async (event, context, callback) =>{
     const Bucket = event.Records[0].s3.bucket.name;
     const Key = decodeURIComponent(event.Records[0].s3.Object.key);
     console.log(Bucket, Key);
-    const filename = Key.splite('.')[Key.splite('/').length -1];
+    const filename = Key.splite('/')[Key.splite('/').length -1];
     const ext = Key.splite('.')[Key.splite('.').length - 1].toLowerCase();
     const requiredFormat = ext === 'jpg' ? 'jpeg' : ext;
     console.log('filename', filename, 'ext', ext)
