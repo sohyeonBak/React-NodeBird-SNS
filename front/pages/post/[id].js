@@ -26,6 +26,8 @@ const Post = () => {
            <meta name="description" content={singlePost.content} />
            <meta property="og:title" content={`${singlePost.User.nickname}님의 게시글`} />
            <meta property="og:description" content={singlePost.content} />
+           <meta property="og:image" content={singlePost.Images[0] ? singlePost.Images[0].src : ''} />
+           <meta property="og:url" content={`http://nodebird.letusloveoneanother.com/post/${id}`} />
            </Head>
           <PostCard post={singlePost} />
          </AppLayout>
