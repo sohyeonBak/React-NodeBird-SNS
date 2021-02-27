@@ -12,7 +12,7 @@ import PostImages from './postimages';
 import FollowButton from './followbutton';
 import CommentForm from './commentform';
 import PostCardContent from './postcardcontent';
-import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, RETWEET_REQUEST } from '../reducers/post';
+import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, RETWEET_REQUEST, UPDATE_POST_REQUEST } from '../reducers/post';
 
 
 moment.locale('ko');
@@ -20,6 +20,7 @@ moment.locale('ko');
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const [commentOpen, setCommentOpen] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const id = useSelector((state) => state.user.me?.id);
   
   const onLike = useCallback(()=>{
@@ -46,6 +47,24 @@ const PostCard = ({ post }) => {
   const onToggleComment = useCallback(() => {
     setCommentOpen((prev) => !prev);
   }, []);
+
+  const onClickUpdate = useCallback(()=>{
+    setEditMode(true);
+  },[])
+
+  const onCancelUpdate = useCallback(()=>{
+    setEditMode(false);
+  },[])
+
+  const onChangePost = useCallback((editText)=>()=>{
+    dispatch({
+      type: UPDATE_POST_REQUEST,
+      data: {
+        PostId: post.id,
+        content: editText,
+      }
+    })
+  },[post])
 
   const onRemovePost = useCallback(()=>{
     if(!id) {
@@ -76,7 +95,7 @@ const PostCard = ({ post }) => {
         actions={[
           <RetweetOutlined key="retweet" onClick={onRetweet} />,
           liked
-            ? <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onUnlike} />
+            ? <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onUnLike} />
             : <HeartOutlined key="heart" onClick={onLike} />,
           <MessageOutlined key="comment" onClick={onToggleComment} />,
           <Popover key="more" 
@@ -84,7 +103,7 @@ const PostCard = ({ post }) => {
               <Button.Group >
                 {id && post.User.id === id 
                 ? (<>
-                    <Button >수정</Button>
+                    {!post.RetweetId && <Button onClick={onClickUpdate}>수정</Button>}
                     <Button type="danger" onClick={onRemovePost} >삭제</Button>
                   </>) 
                 : <Button >신고</Button>}
@@ -105,7 +124,7 @@ const PostCard = ({ post }) => {
                   </Link>
                 )} 
                 title={post.Retweet.User.nickname} 
-                description ={<PostCardContent postData={post.content} />} />
+                description ={<PostCardContent onChangePost={onChangePost} onCancelUpdate={onCancelUpdate} postData={post.Retweet.content} />} />
             </Card>
           )
           : (
@@ -118,7 +137,7 @@ const PostCard = ({ post }) => {
                   </Link>
                 )} 
                 title={post.User.nickname} 
-                description={<PostCardContent postData={post.content} />} />
+                description={<PostCardContent onChangePost={onChangePost} postData={post.content} editMode={editMode} onCancelUpdate={onCancelUpdate} postData={post.content}/>} />
             </>
             )
         }
