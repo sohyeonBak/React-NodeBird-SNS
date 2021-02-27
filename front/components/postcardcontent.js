@@ -20,7 +20,8 @@ const PostCardContent = ({ postData, editMode, onCancelUpdate, onChangePost }) =
   
   const onChangeText = useCallback((e)=>{
     setEditText(e.target.value)
-  },[])
+    console.log(e.target.value)
+  })
 
   
   return(
@@ -30,7 +31,7 @@ const PostCardContent = ({ postData, editMode, onCancelUpdate, onChangePost }) =
         <>
           <TextArea value={editText} conChange={onChangeText}/>
           <Button.Group >
-            <Button type="primary" onClick={onChangePost(editText)}>수정</Button>
+            <Button onClick={onChangePost(editText)}>수정</Button>
             <Button type="danger" onClick={onCancelUpdate}>취소</Button>
           </Button.Group>
         </>

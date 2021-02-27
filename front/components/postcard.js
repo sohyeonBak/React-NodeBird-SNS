@@ -23,6 +23,24 @@ const PostCard = ({ post }) => {
   const [editMode, setEditMode] = useState(false);
   const id = useSelector((state) => state.user.me?.id);
   
+  const onClickUpdate = useCallback(()=>{
+    setEditMode(true);
+  },[])
+
+  const onCancelUpdate = useCallback(()=>{
+    setEditMode(false);
+  },[])
+
+  const onChangePost = useCallback((editText)=>()=>{
+    dispatch({
+      type: UPDATE_POST_REQUEST,
+      data: {
+        PostId: post.id,
+        content: editText,
+      }
+    })
+  },[post])
+
   const onLike = useCallback(()=>{
     if(!id) {
       return alert('로그인이 필요합니다')
@@ -48,23 +66,7 @@ const PostCard = ({ post }) => {
     setCommentOpen((prev) => !prev);
   }, []);
 
-  const onClickUpdate = useCallback(()=>{
-    setEditMode(true);
-  },[])
-
-  const onCancelUpdate = useCallback(()=>{
-    setEditMode(false);
-  },[])
-
-  const onChangePost = useCallback((editText)=>()=>{
-    dispatch({
-      type: UPDATE_POST_REQUEST,
-      data: {
-        PostId: post.id,
-        content: editText,
-      }
-    })
-  },[post])
+  
 
   const onRemovePost = useCallback(()=>{
     if(!id) {
@@ -124,7 +126,7 @@ const PostCard = ({ post }) => {
                   </Link>
                 )} 
                 title={post.Retweet.User.nickname} 
-                description ={<PostCardContent onChangePost={onChangePost} onCancelUpdate={onCancelUpdate} postData={post.Retweet.content} />} />
+                description ={<PostCardContent postData={post.Retweet.content} onChangePost={onChangePost} onCancelUpdate={onCancelUpdate} />} />
             </Card>
           )
           : (
@@ -137,7 +139,7 @@ const PostCard = ({ post }) => {
                   </Link>
                 )} 
                 title={post.User.nickname} 
-                description={<PostCardContent onChangePost={onChangePost} postData={post.content} editMode={editMode} onCancelUpdate={onCancelUpdate} postData={post.content}/>} />
+                description={<PostCardContent postData={post.content} editMode={editMode} onChangePost={onChangePost}  onCancelUpdate={onCancelUpdate} />} />
             </>
             )
         }
