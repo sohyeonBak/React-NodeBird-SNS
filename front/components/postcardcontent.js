@@ -2,12 +2,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import TextArea from 'antd/lib/input/TextArea';
-import { Button } from 'antd';
-import { UPDATE_POST_REQUEST } from '../reducers/post';
+
+import { Button, Input } from 'antd';
 import { useSelector } from 'react-redux';
 
-
+const { TextArea } = Input;
 
 const PostCardContent = ({ postData, editMode, onCancelUpdate, onChangePost }) =>{ 
   const [editText,setEditText] = useState(postData);
