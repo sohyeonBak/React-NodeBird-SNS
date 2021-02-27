@@ -29,7 +29,7 @@ const PostCardContent = ({ postData, editMode, onCancelUpdate, onChangePost }) =
     {editMode
       ? (
         <>
-          <TextArea value={editText} conChange={onChangeText}/>
+          <TextArea value={editText} onChange={onChangeText}/>
           <Button.Group >
             <Button onClick={onChangePost(editText)}>수정</Button>
             <Button type="danger" onClick={onCancelUpdate}>취소</Button>
