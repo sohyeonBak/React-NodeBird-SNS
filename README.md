@@ -42,10 +42,7 @@
 
 ### Study 📌
 `SSR과 SPA`
-- Velog : <>
-
-`Next를 이용한 동적 라우팅`
-- Velog : <>
+- Velog : <https://velog.io/@sohyeonbak_oly/MPASSR-%EA%B3%BC-SPACSR-Next.js>
 
 `Redux-saga`
 - Velog : <>
